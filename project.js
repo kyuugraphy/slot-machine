@@ -125,15 +125,51 @@ const transpose = (reels) => {
 };
 
 
+const printRows = (rows) => {
+    for (const row of rows){
+        let rowString = "";
+        for (const[i, symbol] of row.entries()){
+            rowString += symbol; // concatenating / adding element into the string
+            if (i != row.length - 1){
+                rowString += " | "
+            }
+        }
+        console.log(rowString);
+    }
+};
 
-const reels = spin();
-const rows = transpose(reels)
 
-console.log(reels)
-console.log(rows)
+const getWinnings = (rows, bet, lines) => {
+    let winnings = 0;
+    for (let row = 0; row < lines; row++) {
+        const symbols = rows[row];
+        let allSame = true;
 
-/*
+        for (const symbol of symbols) {
+            if (symbol != symbols[0]){ //compares all the symbols to the 1st and has to be the same
+                allSame = false;
+                break; // exits the for loop -> we did not win in this specific row
+            }
+        }
+
+        if (allSame) {
+            winnings += bet * SYMBOL_VALUES[symbols[0]]; // grab 1st symbol, take the value and multiply it by bet
+        }
+    }
+    return winnings;
+};
+
 let balance = deposit(); // adjusts value of the variable
 const betLines = getNumberOfLines(); //constant is immutable after being assigned the value
 const bet = getBet(balance, betLines);
-*/
+const reels = spin();
+const rows = transpose(reels);
+
+console.log(reels);
+console.log(rows);
+
+printRows(rows);
+const winning = getWinnings(rows, bet, betLines)
+console.log("You won, $" + winning.toString())
+
+
