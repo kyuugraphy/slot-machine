@@ -182,7 +182,7 @@ const game = () => {
             console.log("You ran out of money!");
             break;
         }
-        const playAgain = prompt("Do you want to play again (y/n)?");
+        const playAgain = prompt("Do you want to play again (y/n)? ");
         if (playAgain != "y") break;
     }
 }
