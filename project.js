@@ -24,6 +24,8 @@ const deposit = () => {
     }
 };
 
+// 2. determine number of lines to bet
+
 const getNumberOfLines = () => {
     while (true) {
         const lines = prompt ("Enter a number of lines to bet on (1-3): ");
@@ -38,5 +40,27 @@ const getNumberOfLines = () => {
     }
 }
 
-const depositAmount = deposit();
-const betLines = getNumberOfLines();
+// 3. collecta bet amount
+
+const getBet = (balance, lines) => {
+    
+        while (true) {
+            const bet = prompt ("Enter a bet per line: ");
+            //now we need to convert it to a number, bcs input is default in string
+            const numberBet = parseFloat(bet);
+    
+            if (isNaN(numberBet) || numberBet <=0 || numberBet > (balance / lines)) {
+                console.log("Invalid bet, try again.");
+            } else {
+                return numberBet;
+            }
+        }
+    
+    
+}
+
+
+
+let balance = deposit(); // adjusts value of the variable
+const betLines = getNumberOfLines(); //constant is immutable after being assigned the value
+const bet = getBet(balance, betLines);
