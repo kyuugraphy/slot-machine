@@ -6,8 +6,7 @@
 // 6. give user their winnings
 // 7. play again (?)
 
-function deposit() {
-    return
-}
+//getting the user input -> use the installed package
+// "we require input and make it a function"
+const prompt = require("prompt-sync")();
 
-const x = deposit()
