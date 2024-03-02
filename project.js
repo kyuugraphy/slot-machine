@@ -91,8 +91,9 @@ const spin = () => {
             symbols.push(symbol);
         }
     }
-    const reels = [[], [], []];
+    const reels = [];
     for (let i =0; i < COLS; i++){
+        reels.push([]);
         const reelSymbols = [...symbols]; // copies the symbols we have available to choose for each reel into another array "reelSymbols"
         for (let j = 0; j < ROWS; j++) {
             const randomIndex = Math.floor(Math.random() * reelSymbols.length);
