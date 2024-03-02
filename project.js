@@ -159,17 +159,33 @@ const getWinnings = (rows, bet, lines) => {
     return winnings;
 };
 
-let balance = deposit(); // adjusts value of the variable
-const betLines = getNumberOfLines(); //constant is immutable after being assigned the value
-const bet = getBet(balance, betLines);
-const reels = spin();
-const rows = transpose(reels);
+// 6. give user their winnings
 
-console.log(reels);
-console.log(rows);
+const game = () => {
 
-printRows(rows);
-const winning = getWinnings(rows, bet, betLines)
-console.log("You won, $" + winning.toString())
+    let balance = deposit(); // adjusts value of the variable
+    while (true){
+        console.log("You have a balance $ " + balance.toString())
+        const betLines = getNumberOfLines(); //constant is immutable after being assigned the value
+        const bet = getBet(balance, betLines);
+        balance -= bet * betLines;
+        const reels = spin();
+        const rows = transpose(reels);
+        console.log(reels);
+        console.log(rows);
+        printRows(rows);
+        const winning = getWinnings(rows, bet, betLines)
+        balance += winning;
+        console.log("You won, $" + winning.toString())
 
+        if (balance <= 0) {
+            console.log("You ran out of money!");
+            break;
+        }
+        const playAgain = prompt("Do you want to play again (y/n)?");
+        if (playAgain != "y") break;
+    }
+}
+
+game();
 
